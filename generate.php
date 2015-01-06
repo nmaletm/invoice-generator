@@ -1,21 +1,12 @@
 <?php
+include "functions.php";
 
 include "html2pdf/html2pdf.class.php";
-
-if(!function_exists('get')){
-	function get($name) {
-		return htmlspecialchars($_GET[$name]);
-	}
-	function getItems() {
-		return array('names' => $_GET['names'], 'totals' => $_GET['totals']);
-	}
-}
-
 
 
 // get the HTML
 ob_start();
-include(dirname(__FILE__).'/template.php');
+include(dirname(__FILE__).'/templates/'.$GLOBALS['user']['template']);
 $content = ob_get_clean();
 
 // convert in PDF

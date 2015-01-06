@@ -1,31 +1,7 @@
 <?php
+include "functions.php";
 
 
-$params = array(
-	'Factura' => array(
-		'date' => 'Data',
-		'invoiceNum' => 'Nº factura',
-		'subtotal' => 'Total bruto (€)',
-		'ivaPerc' => 'IVA (%)',
-		'iva' => 'Valor IVA (€)',
-		'total' => 'Valor Total (€)',
-	),
-	'Client' => array(
-		'clientName' => 'Nom client',
-		'clientCIF' => 'NIF/CIF client',
-		'clientAdress' => 'Adreça client linia 1',
-		'clientAdress2' => 'Adreça client linia 2',
-	),
-
-);
-
-function get($name) {
-	return htmlspecialchars($_GET[$name]);
-}
-
-function getItems() {
-	return array('names' => $_GET['names'], 'totals' => $_GET['totals']);
-}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -39,38 +15,48 @@ function getItems() {
 <body>
 
 <div class="bar">
+	<select name='user' id="userSelect">
+		<option value="<?=$GLOBALS['user']['username']?>" selected="selected"><?=$GLOBALS['user']['username']?></option>
+		<option disabled>-----------</option>
+<?php
+foreach ($GLOBALS['users'] as $username => $data) {
+echo "\t\t<option value='$username'>$username</option>";
+}
+?>
+	</select> - 
 	<a href="#" id="generate">Generar</a> - 
 	<a href="#" id="linkPDF">Link factura (PDF)</a> - 
 	<a href="#" id="linkHTML">Link factura (HTML)</a>
 </div>
 <div class="block block-form">
 <form method="get" id="form">
-
+	<input type="hidden" name='username' value='<?=$GLOBALS['user']['username']?>' id="userHidden"/>
 <?php
 
 $items = getItems();
-
-
 
 echo "<div class='paramBlock'>";
 echo "<h3>Items</h3>";
 foreach ($items['names'] as $i => $name) {
 	$total = $items['totals'][$i];
-	if ($name || $total) {
+	$value = $items['values'][$i];
+	if ($name || $value || $total) {
 		echo "<input class='field itemName' name='names[]' value='".$name."' />";
+		echo "<input class='field itemValue' name='values[]' value='".$value."' />";
 		echo "<input class='field itemTotal' name='totals[]' value='".$total."' /> €";
 	}
 }
 echo "<input class='itemName' name='names[]' value='' />";
-echo "<input class='itemTotal' name='totals[]' value='' />";
+echo "<input class='itemValue' name='values[]' value='' />";
+echo "<input class='itemTotal' name='totals[]' value='' /> €";
 echo "</div>";
 
-foreach ($params as $blockName => $blockParams) {
+foreach ($GLOBALS['user']['templateParams'] as $blockName => $blockParams) {
 	echo "<div class='paramBlock'>";
 	echo "<h3>$blockName</h3>";
 	foreach ($blockParams as $key => $value) {
 		echo "<b>$value: </b><br>\n";
-		echo "<input name='$key' class='field' value='".get($key)."'' />";
+		echo "<input name='$key' class='field' value='".get($key)."' />";
 	}
 	echo "</div>";
 }
@@ -122,10 +108,13 @@ iframe{
 	color: white;
 }
 .itemName{
-	width: 80%
+	width: 70%
+}
+.itemValue{
+	width: 10%
 }
 .itemTotal{
-	width: 15%
+	width: 10%
 }
 .block{
 	width: 50%;
@@ -137,6 +126,9 @@ iframe{
 	background: #eee;
 	padding: 10px; 
 	margin-bottom: 10px;
+}
+select{
+	text-transform: capitalize;
 }
 *{
 	box-sizing: border-box;
@@ -152,6 +144,11 @@ $(function() {
 	$('#generate').click(function(){
 		$('#form').submit();
 	});
+	$('#userSelect').change(function(){
+		$('#userHidden').val($(this).val());
+		$('#form').submit();
+	});
+
 });
 
 function getUrl(){
@@ -161,9 +158,10 @@ function getUrl(){
 
 function generate(){
 	var url = getUrl();
+	var templatePath = 'templates/<?=$GLOBALS['user']['template']?>';
 	$('iframe').attr('src', url);
 	$('#linkPDF').attr('href', url);
-	$('#linkHTML').attr('href', url.replace('generate','template'));
+	$('#linkHTML').attr('href', url.replace('generate.php',templatePath));
 }
 
 </script>
