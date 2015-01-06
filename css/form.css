@@ -1,0 +1,98 @@
+html, body{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	font-family: 'Arial';
+}
+
+h1,h2,h3,h4{
+	margin: 5px 0 10px 0;
+}
+
+
+.block-form{
+	padding-top: 45px;
+}
+
+form{
+	height: 100%;
+	max-height: 100%;
+	overflow-y: scroll;
+}
+
+.field{
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+iframe{
+	position: fixed;
+	top: 0;
+	right: 0;
+}
+
+.bar{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 50%;
+	background: #bbb;
+	height: 40px;
+	padding: 5px;
+}
+
+.bar img{
+	height: 30px;
+	vertical-align: middle;
+	margin-left: 10px;
+}
+
+.bar, .bar a, .bar a:visited{
+	color: white;
+}
+
+.icon{
+	height: 64px;
+	vertical-align: middle;
+}
+
+.itemName{
+	width: 70%;
+}
+
+.itemValue{
+	width: 10%;
+}
+
+.itemTotal{
+	width: 10%;
+}
+
+
+.block{
+	width: 50%;
+	height: 100%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.paramBlock{
+	background: #eee;
+	padding: 10px; 
+	margin-bottom: 10px;
+}
+
+select{
+	text-transform: capitalize;
+}
+
+*{
+	box-sizing: border-box;
+}
+
+.dialog{
+	display: none;
+}

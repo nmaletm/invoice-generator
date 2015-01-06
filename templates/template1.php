@@ -17,8 +17,8 @@ include "../functions.php";
 				<h3>Factura</h3>
 			</td>
 			<td class="block-30">
-				<?=$GLOBALS['user']['authorAdress1']?><br>
-				<?=$GLOBALS['user']['authorAdress2']?><br>
+				<?=$GLOBALS['user']['authorAddress1']?><br>
+				<?=$GLOBALS['user']['authorAddress2']?><br>
 				N.I.F. <?=$GLOBALS['user']['authorNIF']?><br>
 				<a href="mailto:<?=$GLOBALS['user']['authorMail']?>"><?=$GLOBALS['user']['authorMail']?></a><br>
 				<a href="http://<?=$GLOBALS['user']['authorWeb']?>"><?=$GLOBALS['user']['$authorWeb']?></a><br>
@@ -29,8 +29,8 @@ include "../functions.php";
 		<tr>
 			<td class="block-50">
 				<?=get('clientName')?><br>
-				<?=get('clientAdress')?><br>
-				<?=get('clientAdress2')?><br>
+				<?=get('clientAddress')?><br>
+				<?=get('clientAddress2')?><br>
 				<?=get('clientCIF')?><br>
 			</td>
 			<td class="block-50">
@@ -60,7 +60,7 @@ foreach ($items['names'] as $i => $name) {
 	if ($name ||$total) {
 		echo "<tr>";
 		echo "<td class='block-80'>".$name."</td>";
-		echo "<td class='block-20' style='text-align: right;'>".$total." €</td>";
+		echo "<td class='block-20' style='text-align: right;'>".formatMoneyNumber($total)." €</td>";
 		echo "</tr>\n";
 	}
 }
@@ -77,9 +77,9 @@ foreach ($items['names'] as $i => $name) {
 			<td class="block-20">Total</td>
 		</tr>
 		<tr>
-			<td><?=get('subtotal')?> €</td>
-			<td><?=get('iva')?> €</td>
-			<td><?=get('total')?> €</td>
+			<td><?=formatMoneyNumber(get('subtotal'))?> €</td>
+			<td><?=formatMoneyNumber(get('iva'))?> €</td>
+			<td><?=formatMoneyNumber(get('total'))?> €</td>
 		</tr>
 	</table>
 

@@ -18,9 +18,13 @@ try
 	}
 	$fileName .= '.pdf';
 	
+	$action = 'I';
+	if ($_GET['download']) {
+		$action = 'D';
+	}
     $html2pdf = new HTML2PDF('P', 'A4', 'fr');
     $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-    $html2pdf->Output($fileName);
+    $html2pdf->Output($fileName, $action);
 }
 catch(HTML2PDF_exception $e) {
 	header('Content-Type: text/html; charset=utf-8');

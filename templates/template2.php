@@ -16,8 +16,8 @@ include "../functions.php";
 				<h2><?=$GLOBALS['user']['authorName']?></h2>
 			</td>
 			<td class="block-30">
-				<?=$GLOBALS['user']['authorAdress1']?><br>
-				<?=$GLOBALS['user']['authorAdress2']?><br>
+				<?=$GLOBALS['user']['authorAddress1']?><br>
+				<?=$GLOBALS['user']['authorAddress2']?><br>
 				N.I.F. <?=$GLOBALS['user']['authorNIF']?><br>
 			</td>
 		</tr>
@@ -26,11 +26,11 @@ include "../functions.php";
 		<tr>
 			<td class="block-50">
 				<?=get('clientName')?><br>
-				<?=get('clientAdress')?><br>
-				<?=get('clientAdress2')?><br>
+				<?=get('clientAddress')?><br>
+				<?=get('clientAddress2')?><br>
 				<?=get('clientCIF')?><br>
 			</td>
-			<td class="block-50">
+			<td class="block-50 atop">
 				<table class="block-100">
 					<tr style="font-weight: bold;">
 						<td class="block-50">Fecha</td>
@@ -71,8 +71,8 @@ foreach ($items['values'] as $i => $sesion) {
 		$total = $sesion * $priecePerSesion;
 		echo "\t<tr>";
 		echo "<td>".$sesion."</td>";
-		echo "<td>".$priecePerSesion."</td>";
-		echo "<td class='aright'>".$total." €</td>";
+		echo "<td>".formatMoneyNumber($priecePerSesion)."</td>";
+		echo "<td class='aright'>".formatMoneyNumber($total)." €</td>";
 		echo "</tr>\n";
 		$gross += $total;
 	}
@@ -87,19 +87,19 @@ $total = round($gross - $totalIRPF,2);
 	<table class="row">
 		<tr>
 			<td class="block-70 bold aright">Total bruto</td>
-			<td class="block-30 aright"><?=$gross?> €</td>
+			<td class="block-30 aright"><?=formatMoneyNumber($gross)?> €</td>
 		</tr>
 		<tr>
 			<td class="bold aright">IVA (0%) *</td>
-			<td class="aright">0 €</td>
+			<td class="aright">0.00 €</td>
 		</tr>
 		<tr>
 			<td class="bold aright">IRPF (<?=$irpf?>%)</td>
-			<td class="aright"><?=$totalIRPF?> €</td>
+			<td class="aright"><?=formatMoneyNumber($totalIRPF)?> €</td>
 		</tr>
 		<tr>
 			<td class="bold aright"><h4>Total</h4></td>
-			<td class="aright"><?=$total?> €</td>
+			<td class="bold aright"><?=formatMoneyNumber($total)?> €</td>
 		</tr>
 	</table>
 
@@ -175,8 +175,11 @@ table {
     border-collapse: collapse;
 }
 td, div{
-    vertical-align: top;
+    vertical-align: middle;
     padding: 5px;
+}
+tr, .atop{
+	vertical-align: top;
 }
 *{
 	/*border: 1px solid; /**/

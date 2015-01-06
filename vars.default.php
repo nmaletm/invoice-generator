@@ -6,8 +6,8 @@ Copy this file to vars.php to set the variables of each user.
 $GLOBALS['users'] = array(
 	'user1' => array(
 		'authorName' => 'Marco Polo Ferrer',
-		'authorAdress1' => 'Carrer Verdaguer 51',
-		'authorAdress2' => '08015 Barcelona',
+		'authorAddress1' => 'Carrer Verdaguer 51',
+		'authorAddress2' => '08015 Barcelona',
 		'authorNIF' => '7654321 K',
 		'authorMail' => 'info@nestor.cat',
 		'authorWeb' => 'www.nestor.cat',
@@ -24,16 +24,16 @@ $GLOBALS['users'] = array(
 			'Client' => array(
 				'clientName' => 'Nom client',
 				'clientCIF' => 'NIF/CIF client',
-				'clientAdress' => 'Adreça client linia 1',
-				'clientAdress2' => 'Adreça client linia 2',
+				'clientAddress' => 'Adreça client linia 1',
+				'clientAddress2' => 'Adreça client linia 2',
 			),
 
 		),
 	),
 	'rubieanes' => array(
 		'authorName' => 'Pepe Rubianes',
-		'authorAdress1' => 'Carrer Valencia 51',
-		'authorAdress2' => '08015 Barcelona',
+		'authorAddress1' => 'Carrer Valencia 51',
+		'authorAddress2' => '08015 Barcelona',
 		'authorNIF' => '3235235 K',
 		'authorMail' => 'info@nestor.cat',
 		'authorWeb' => 'www.nestor.cat',
