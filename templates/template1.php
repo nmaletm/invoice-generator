@@ -12,9 +12,8 @@ include "../functions.php";
 <div class="page">
 	<table class="row">
 		<tr>
-			<td class="block-70">
+			<td class="block-70" style="vertical-align: middle;">
 				<h1><?=$GLOBALS['user']['authorName']?></h1>
-				<h3>Factura</h3>
 			</td>
 			<td class="block-30">
 				<?=$GLOBALS['user']['authorAddress1']?><br>
@@ -36,11 +35,13 @@ include "../functions.php";
 			<td class="block-50">
 				<table class="block-100">
 					<tr style="font-weight: bold;">
-						<td class="block-50">Fecha</td>
-						<td class="block-50">Factura Nº</td>
+						<td class="block-30">Fecha<br>expedición</td>
+						<td class="block-30">Fecha<br>operación</td>
+						<td class="block-30">Factura Nº</td>
 					</tr>
 					<tr>
-						<td><?=get('date')?></td>
+						<td><?=get('dateExp')?></td>
+						<td><?=get('dateExp')?></td>
 						<td><?=get('invoiceNum')?></td>
 					</tr>
 				</table>
@@ -48,19 +49,31 @@ include "../functions.php";
 		</tr>
 	</table>
 
-	<div class="row header">
-		Conceptos
+	<div >
+		
 	</div>
 
 <table class="row">
-<?php 
+	<tr class="header">
+		<td>Cant.</td>
+		<td>Concepto</td>
+		<td>Precio<br>unitario</td>
+		<td class="alginRight">Importe</td>
+	</tr>
+<?php
+$subtotal = 0;
 $items = getItems();
 foreach ($items['names'] as $i => $name) {
-	$total = $items['totals'][$i];
-	if ($name ||$total) {
+	$numItem = $items['values'][$i];
+	$priceItem = $items['totals'][$i];
+	$total = $numItem * $priceItem;
+	$subtotal += $total;
+	if ($name || $total) {
 		echo "<tr>";
-		echo "<td class='block-80'>".$name."</td>";
-		echo "<td class='block-20' style='text-align: right;'>".formatMoneyNumber($total)." €</td>";
+		echo "<td class='block-10'>".$numItem."</td>";
+		echo "<td class='block-60'>".$name."</td>";
+		echo "<td class='block-15'>".formatMoneyNumber($priceItem)." €</td>";
+		echo "<td class='block-15 alginRight'>".formatMoneyNumber($total)." €</td>";
 		echo "</tr>\n";
 	}
 }
@@ -69,19 +82,36 @@ foreach ($items['names'] as $i => $name) {
 	<div class="row header">
 		Cómputo
 	</div>
+<?php
 
+$ivaPerc = get('ivaPerc');
+$irpfPerc = get('irpfPerc');
+
+$iva = $subtotal * $ivaPerc / 100;
+$irpf = $subtotal * $irpfPerc / 100;
+$total = $subtotal + $iva - $irpf;
+?>
 	<table class="row">
 		<tr style="font-weight: bold;">
 			<td class="block-20">Total bruto</td>
-			<td class="block-60">IVA (<?=get('ivaPerc')?>%)</td>
-			<td class="block-20">Total</td>
+			<td class="block-20">IVA (<?=$ivaPerc?>%)</td>
+			<td class="block-40">IRPF (<?=$irpfPerc?>%)</td>
+			<td class="block-20 alginRight">Total</td>
 		</tr>
 		<tr>
-			<td><?=formatMoneyNumber(get('subtotal'))?> €</td>
-			<td><?=formatMoneyNumber(get('iva'))?> €</td>
-			<td><?=formatMoneyNumber(get('total'))?> €</td>
+			<td><?=formatMoneyNumber($subtotal)?> €</td>
+			<td><?=formatMoneyNumber($iva)?> €</td>
+			<td><?=formatMoneyNumber($irpf)?> €</td>
+			<td class="alginRight"><?=formatMoneyNumber($total)?> €</td>
 		</tr>
 	</table>
+
+<br><br><br>
+<br><br><br>
+
+	<div class="row legal">
+		Operación localizada en sede del destinatario en virtud del art. 69 de la Ley 37/1992, del IVA.
+	</div>
 
 </div>
 </body>
@@ -98,6 +128,9 @@ body{
 .row{
 	width: 100%;
 }
+.header-inner{
+	padding: 5px;
+}
 h1,h2,h3,h4{
 	margin: 5px 0 10px 0;
 }
@@ -108,8 +141,18 @@ h1,h2,h3,h4{
 	color: white;
 }
 
+.legal{
+	font-size: 10px;
+}
 .bordered{
 	border: 1px solid;
+}
+
+.alginRight{
+	text-align: right;
+}
+.alginCenter{
+	text-align: center;
 }
 
 .block-100{width: 100%;}
@@ -121,6 +164,7 @@ h1,h2,h3,h4{
 .block-40{width: 40%;}
 .block-30{width: 30%;}
 .block-20{width: 20%;}
+.block-15{width: 15%;}
 .block-10{width: 10%;}
 .block-0{width: 0%;}
 
@@ -129,7 +173,8 @@ table {
     border-collapse: collapse;
 }
 td, div{
-    vertical-align: top;
+    /*vertical-align: top;*/
+    vertical-align: middle;
     padding: 5px;
 }
 *{
