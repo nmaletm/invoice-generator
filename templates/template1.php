@@ -12,48 +12,47 @@ include "../functions.php";
 <div class="page">
 	<table class="row">
 		<tr>
-			<td class="block-70" style="vertical-align: middle;">
+			<td class="block-65" style="vertical-align: top;">
 				<h1><?=$GLOBALS['user']['authorName']?></h1>
 			</td>
-			<td class="block-30">
+			<td class="block-35 alginRight">
 				<?=$GLOBALS['user']['authorAddress1']?><br>
 				<?=$GLOBALS['user']['authorAddress2']?><br>
 				N.I.F. <?=$GLOBALS['user']['authorNIF']?><br>
-				<a href="mailto:<?=$GLOBALS['user']['authorMail']?>"><?=$GLOBALS['user']['authorMail']?></a><br>
-				<a href="http://<?=$GLOBALS['user']['authorWeb']?>"><?=$GLOBALS['user']['$authorWeb']?></a><br>
+				<a href="mailto:<?=$GLOBALS['user']['authorMail']?>"><?=$GLOBALS['user']['authorMail']?></a>
+				<br>
+				<a href="http://<?=$GLOBALS['user']['authorWeb']?>"><?=$GLOBALS['user']['$authorWeb']?></a>
 			</td>
 		</tr>
 	</table>
 	<table class="row" style="margin-top: 10px;">
 		<tr>
-			<td class="block-50">
+			<td class="block-65">
 				<?=get('clientName')?><br>
 				<?=get('clientAddress')?><br>
 				<?=get('clientAddress2')?><br>
 				<?=get('clientCIF')?><br>
 			</td>
-			<td class="block-50">
-				<table class="block-100">
-					<tr style="font-weight: bold;">
-						<td class="block-30">Fecha<br>expedición</td>
-						<td class="block-30">Fecha<br>operación</td>
-						<td class="block-30">Factura Nº</td>
+			<td class="block-35">
+				<table class="block-100 no-padding-table">
+					<tr>
+						<td class="block-60 bold">Fecha expedición</td>
+						<td class="block-40 alginRight"><?=get('dateExp')?></td>
 					</tr>
 					<tr>
-						<td><?=get('dateExp')?></td>
-						<td><?=get('dateExp')?></td>
-						<td><?=get('invoiceNum')?></td>
+						<td class="bold">Fecha operación</td>
+						<td class="alginRight"><?=get('dateOpe')?></td>
+					</tr>
+					<tr>
+						<td class="bold">Factura Nº</td>
+						<td class="alginRight"><?=get('invoiceNum')?></td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 	</table>
 
-	<div >
-		
-	</div>
-
-<table class="row">
+<table class="row row-block">
 	<tr class="header">
 		<td>Cant.</td>
 		<td>Concepto</td>
@@ -79,7 +78,7 @@ foreach ($items['names'] as $i => $name) {
 }
 ?>
 </table>
-	<div class="row header">
+	<div class="row header row-block">
 		Cómputo
 	</div>
 <?php
@@ -92,11 +91,11 @@ $irpf = $subtotal * $irpfPerc / 100;
 $total = $subtotal + $iva - $irpf;
 ?>
 	<table class="row">
-		<tr style="font-weight: bold;">
-			<td class="block-20">Total bruto</td>
-			<td class="block-20">IVA (<?=$ivaPerc?>%)</td>
-			<td class="block-40">IRPF (<?=$irpfPerc?>%)</td>
-			<td class="block-20 alginRight">Total</td>
+		<tr>
+			<td class="block-20 bold">Total bruto</td>
+			<td class="block-20 bold">IVA (<?=$ivaPerc?>%)</td>
+			<td class="block-40 bold">IRPF (<?=$irpfPerc?>%)</td>
+			<td class="block-20 alginRight bold">Total</td>
 		</tr>
 		<tr>
 			<td><?=formatMoneyNumber($subtotal)?> €</td>
@@ -128,14 +127,14 @@ body{
 .row{
 	width: 100%;
 }
-.header-inner{
-	padding: 5px;
-}
+
 h1,h2,h3,h4{
-	margin: 5px 0 10px 0;
+	margin: 0 0 10px 0;
+}
+.row-block{
+	margin-top: 30px;
 }
 .header{
-	margin-top: 30px;
 	font-weight: bold;
 	background-color: grey;
 	color: white;
@@ -148,6 +147,9 @@ h1,h2,h3,h4{
 	border: 1px solid;
 }
 
+.bold{
+	font-weight: bold;
+}
 .alginRight{
 	text-align: right;
 }
@@ -156,16 +158,25 @@ h1,h2,h3,h4{
 }
 
 .block-100{width: 100%;}
+.block-95{width: 95%;}
 .block-90{width: 90%;}
+.block-85{width: 85%;}
 .block-80{width: 80%;}
+.block-75{width: 75%;}
 .block-70{width: 70%;}
+.block-65{width: 65%;}
 .block-60{width: 60%;}
+.block-55{width: 55%;}
 .block-50{width: 50%;}
+.block-45{width: 45%;}
 .block-40{width: 40%;}
+.block-35{width: 35%;}
 .block-30{width: 30%;}
+.block-25{width: 25%;}
 .block-20{width: 20%;}
 .block-15{width: 15%;}
 .block-10{width: 10%;}
+.block-5{width: 5%;}
 .block-0{width: 0%;}
 
 table { 
@@ -176,6 +187,9 @@ td, div{
     /*vertical-align: top;*/
     vertical-align: middle;
     padding: 5px;
+}
+.no-padding-table td{
+	padding: 0;
 }
 *{
 	/*border: 1px solid; /**/
