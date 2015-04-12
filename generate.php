@@ -17,7 +17,7 @@ try
 		$fileName = 'invoice';
 	}
 	$fileName .= '.pdf';
-	
+	$fileName = str_replace('/', '-', $fileName);
 	$action = 'I';
 	if ($_GET['download']) {
 		$action = 'D';

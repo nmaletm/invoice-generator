@@ -39,6 +39,9 @@ foreach ($items['names'] as $i => $name) {
 echo "<input class='itemName' name='names[]' value='' />";
 echo "<input class='itemValue' name='values[]' value='' />";
 echo "<input class='itemTotal' name='totals[]' value='' /> €";
+echo "<input class='itemName' name='names[]' value='' />";
+echo "<input class='itemValue' name='values[]' value='' />";
+echo "<input class='itemTotal' name='totals[]' value='' /> €";
 echo "</div>";
 
 foreach ($GLOBALS['user']['templateParams'] as $blockName => $blockParams) {
@@ -58,7 +61,7 @@ foreach ($GLOBALS['user']['templateParams'] as $blockName => $blockParams) {
 
 <div id="dialog-invoice" class="dialog" title="Factura">
 	<p>Guarda aquesta url:</p>
-	<code class="formUrl"></code>
+	<textarea class="formUrl" style="width:100%" onclick="this.focus();this.select()" readonly="readonly"></textarea>
 	<p>Descarrega el PDF <a href="#" class="downloadUrl"><img src="img/pdf.png" alt="Generate PDF" class="icon"/></a></p>
 </div>
 
@@ -107,6 +110,7 @@ $(function() {
 	});
 });
 
+
 function getUrl(){
 	var params = $('form').serialize();
 	return 'http://tools.storn.es/factura/{{file}}?'+params;
@@ -117,11 +121,12 @@ function generate(){
 	var templatePath = 'templates/<?=$GLOBALS['user']['template']?>';
 	var urlTemplate = url.replace('{{file}}',templatePath);
 	var urlPdf = url.replace('{{file}}', 'generate.php');
+	var urlCopy = url.replace('{{file}}', 'form.php');
 
 	$('iframe').attr('src', urlPdf + '&' + Math.random());
 	$('#linkPDF').attr('href', urlPdf.replace('{{file}}', 'generate.php'));
 	$('#linkHTML').attr('href', urlTemplate);
-	$('.formUrl').html(url.replace('{{file}}', 'form.php'));
+	$('.formUrl').html(urlCopy);
 	$('.downloadUrl').attr('href', urlPdf + '&download=1')
 }
 

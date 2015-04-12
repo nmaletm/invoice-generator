@@ -14,11 +14,14 @@ include "../functions.php";
 		<tr>
 			<td class="block-70">
 				<h2><?=$GLOBALS['user']['authorName']?></h2>
+				<b><?=$GLOBALS['user']['authorTitle']?></b><br>
+				<b><?=$GLOBALS['user']['authorSubtitle']?></b>
 			</td>
 			<td class="block-30">
 				<?=$GLOBALS['user']['authorAddress1']?><br>
 				<?=$GLOBALS['user']['authorAddress2']?><br>
 				N.I.F. <?=$GLOBALS['user']['authorNIF']?><br>
+				Tel. <?=$GLOBALS['user']['authorTel']?><br>
 			</td>
 		</tr>
 	</table>
@@ -103,6 +106,8 @@ $total = round($gross - $totalIRPF,2);
 		</tr>
 	</table>
 
+<br><br><br>
+<br><br><br>
 <br><br><br>
 <br><br><br>
 
