@@ -3,4 +3,3 @@ templates/*
 !templates/template1.php
 
 vars.php
-/vendor/

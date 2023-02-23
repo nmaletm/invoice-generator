@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'reference' => 'd2ee2ae88dbb4bd9f82d2cbcafa9bacd773d4d7b',
+        'name' => 'nmaletm/invoice-generator',
+        'dev' => true,
+    ),
+    'versions' => array(
+        'nmaletm/invoice-generator' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'reference' => 'd2ee2ae88dbb4bd9f82d2cbcafa9bacd773d4d7b',
+            'dev_requirement' => false,
+        ),
+        'spipu/html2pdf' => array(
+            'pretty_version' => 'v5.2.7',
+            'version' => '5.2.7.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spipu/html2pdf',
+            'aliases' => array(),
+            'reference' => 'b0f477711de3052041072897510e690975aa37ce',
+            'dev_requirement' => false,
+        ),
+        'tecnickcom/tcpdf' => array(
+            'pretty_version' => '6.6.2',
+            'version' => '6.6.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../tecnickcom/tcpdf',
+            'aliases' => array(),
+            'reference' => 'e3cffc9bcbc76e89e167e9eb0bbda0cab7518459',
+            'dev_requirement' => false,
+        ),
+    ),
+);
