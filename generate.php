@@ -1,7 +1,10 @@
 <?php
-include "functions.php";
+require __DIR__.'/vendor/autoload.php';
 
-include "html2pdf/html2pdf.class.php";
+use Spipu\Html2Pdf\Html2Pdf;
+
+
+include "functions.php";
 
 
 // get the HTML
@@ -19,10 +22,10 @@ try
 	$fileName .= '.pdf';
 	$fileName = str_replace('/', '-', $fileName);
 	$action = 'I';
-	if ($_GET['download']) {
+	if ($_GET['download'] ?? false) {
 		$action = 'D';
 	}
-    $html2pdf = new HTML2PDF('P', 'A4', 'fr');
+	$html2pdf = new Html2Pdf('P', 'A4', 'fr');
     $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
     $html2pdf->Output($fileName, $action);
 }

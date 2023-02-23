@@ -1,0 +1,12 @@
+{
+    "name": "nmaletm/invoice-generator",
+    "authors": [
+        {
+            "name": "Néstor",
+            "email": "nmaletm@gmail.com"
+        }
+    ],
+    "require": {
+        "spipu/html2pdf": "^5.2"
+    }
+}
